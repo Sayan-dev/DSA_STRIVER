@@ -1,16 +1,26 @@
-import os
-def filePath(name) -> str:
-    file_name = os.path.join(os.path.dirname(__file__), name)
-    return file_name
-f = open(filePath("input.txt"), "r")
-out = open(filePath("output.txt"), "w")
-data = f.read().splitlines()
+from controller import Controller
 
-n = data[0]
+class wrapper:
+    def __init__(self, start, end, no):
+        self.start = start
+        self.end = end
+        self.no = no
 
-start = [int(x) for x in data[1].split(",")]
+class Solution:
 
-end = [int(x) for x in data[2].split(",")]
+    def n_meetings(self,n:int, start: list[int], end:list[int]):
+        # Write your code here
+        meet_list = [wrapper(start[i],end[i],i) for i in range(n)]
+        sorted(meet_list, key=lambda x:(x.end, x.end-x.start))
+        answer = []
+        answer.append(meet_list[0].no+1)
+        max_limit = meet_list[0].end
+
+        for i in range(1,n):
+            if meet_list[i].start > max_limit:
+                max_limit = meet_list[i].end
+                answer.append(meet_list[i].no+1)
+        
 
 
-out.write(f"{n} \n{start} \n{end}")
+        return answer

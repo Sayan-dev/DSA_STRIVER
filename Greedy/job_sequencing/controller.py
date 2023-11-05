@@ -1,4 +1,8 @@
 import os
+
+from decorators import IODecorator
+
+
 class Controller:
     
     def filePath(self,name) -> str:
@@ -10,7 +14,11 @@ class Controller:
         data = f.read().splitlines()
 
         return data
+    
+
     def writeOutput(self, data):
         out = open(self.filePath("output.txt"), "w")
         out.write(data)
         return
+    
+
