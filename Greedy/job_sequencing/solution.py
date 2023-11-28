@@ -29,10 +29,3 @@ class Solution:
                         break
         return [profit, jobs]
 
-
-
-        
-        
-
-
-        return [ans, total]
