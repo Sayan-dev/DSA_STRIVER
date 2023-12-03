@@ -6,23 +6,25 @@ from typing import List
 class Solution:
 
     def rod_cutting(self, n, costs: List[int], sum):
-        dp = [[0 for i in range(sum+1)] for j in range(n)]
+        prev = curr = [0 for i in range(sum+1)]
+        
 
         # total = self.cut(costs,n-1,sum, dp)
         for i in range(sum+1):
-            dp[0][i]=i* costs[0]
+            prev[i]=i* costs[0]
 
         for i in range(n):
             for j in range(sum+1):
-                not_take = 0 + dp[i-1][j]
+                not_take = 0 + prev[j]
                 take = -sys.maxsize
                 if i+1<=j:
-                    take = costs[i] + dp[i][j-i-1]
-                dp[i][j] = max(not_take,take)
+                    take = costs[i] + curr[j-i-1]
+                curr[j] = max(not_take,take)
+            prev = curr
         
 
 
-        return dp[n-1][sum]
+        return prev[sum]
 
 
 
