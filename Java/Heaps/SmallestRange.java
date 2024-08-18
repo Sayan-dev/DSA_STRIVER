@@ -1,3 +1,5 @@
+package Heaps;
+
 import java.util.PriorityQueue;
 
 class Node implements Comparable<Node>{
